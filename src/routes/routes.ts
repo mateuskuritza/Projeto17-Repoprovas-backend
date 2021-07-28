@@ -1,7 +1,7 @@
 import express from "express";
-const mainRouter = express.Router();
+const router = express.Router();
+import teachersRouter from "./teachers";
 
+router.use("/teachers", teachersRouter);
 
-mainRouter.use("/",);
-
-export default mainRouter;
+export default router;
