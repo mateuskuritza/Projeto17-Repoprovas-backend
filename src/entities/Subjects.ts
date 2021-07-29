@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
 import Periods from "./Periods";
+import Teachers from "./Teachers";
 import Tests from "./Tests";
 @Entity("subjects")
 export default class Subjects {
@@ -17,4 +18,8 @@ export default class Subjects {
 
     @ManyToOne(() => Periods, period => period.subjects)
     period: Periods;
+
+    @ManyToMany(() => Teachers)
+    @JoinTable()
+    teachers: Teachers[];
 }
