@@ -8,7 +8,7 @@ const relations = ["category", "teacher", "course", "subject"];
 export async function createTest(req: Request, res: Response) {
     try {
         const { error } = schema.validate(req.body);
-        if (error) return res.status(400).send("invalid body");
+        if (error) return res.status(400).send(error.details[0].message);
         const test = await getRepository(Tests).save(req.body);
         res.status(201).send(test);
     } catch (error) {

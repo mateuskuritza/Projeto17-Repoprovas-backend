@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 const schema = Joi.object({
-    name: Joi.string().pattern(new RegExp('/2[0-9]{3}.[1-2]/gm')).required(),
+    name: Joi.string().pattern(new RegExp('^2[0-9]{3}.[1-2]$')).required(),
     categoryId: Joi.number().min(1).required(),
     teacherId: Joi.number().min(1).required(),
     subjectId: Joi.number().min(1).required(),

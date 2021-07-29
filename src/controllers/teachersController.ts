@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
+import { getManager, getRepository } from "typeorm";
 import Teachers from "../entities/Teachers";
 import schema from "../schemas/Teachers";
+import Periods from "../entities/Periods";
+import Subjects from "../entities/Subjects";
+
+const relations = ["tests", "tests.subject", "tests.subject.period", "tests.category"]
 
 export async function getAll(req: Request, res: Response) {
     try {
-        const allTeachers = await getRepository(Teachers).find();
+        const allTeachers = await getRepository(Teachers).find({ relations });
         res.status(200).send(allTeachers);
     } catch (e) {
         console.log(e);
@@ -18,7 +22,8 @@ export async function getTeacherById(req: Request, res: Response) {
         const teacher = await getRepository(Teachers).findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            relations
         });
         if (!teacher) return res.sendStatus(404);
         res.status(200).send(teacher);
