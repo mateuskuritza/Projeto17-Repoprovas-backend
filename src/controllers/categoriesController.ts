@@ -5,7 +5,7 @@ import Periods from "../entities/Periods";
 
 export async function getAll(req: Request, res: Response) {
     try {
-        const allCategories = await getRepository(Categories).find();
+        const allCategories = await getRepository(Categories).find({ relations: ["tests"] });
         res.status(200).send(allCategories);
     } catch (e) {
         console.log(e);

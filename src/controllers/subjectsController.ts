@@ -3,6 +3,8 @@ import { getRepository } from "typeorm";
 import Subjects from "../entities/Subjects";
 import schema from "../schemas/Subjects";
 
+const relations = ["period"];
+
 export async function createSubject(req: Request, res: Response) {
     try {
         const { error } = schema.validate(req.body);
@@ -17,7 +19,7 @@ export async function createSubject(req: Request, res: Response) {
 
 export async function getAll(req: Request, res: Response) {
     try {
-        const allSubjects = await getRepository(Subjects).find();
+        const allSubjects = await getRepository(Subjects).find({ relations });
         res.status(200).send(allSubjects);
     } catch (e) {
         console.log(e);
@@ -30,7 +32,8 @@ export async function getSubjectById(req: Request, res: Response) {
         const subject = await getRepository(Subjects).findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            relations
         });
         if (!subject) return res.sendStatus(404);
         res.status(200).send(subject);

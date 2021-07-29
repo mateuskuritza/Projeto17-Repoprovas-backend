@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import Subjects from "./Subjects";
 @Entity("periods")
 export default class Periods {
     @PrimaryGeneratedColumn()
@@ -7,4 +7,7 @@ export default class Periods {
 
     @Column()
     name: string;
+
+    @OneToMany(() => Subjects, subjects => subjects.period)
+    subjects: Subjects[];
 }

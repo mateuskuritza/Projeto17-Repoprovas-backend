@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import Tests from "./Tests";
 @Entity("courses")
 export default class Courses {
     @PrimaryGeneratedColumn()
@@ -7,4 +7,7 @@ export default class Courses {
 
     @Column()
     name: string;
+
+    @OneToMany(() => Tests, test => test.course)
+    tests: Tests[];
 }
