@@ -26,15 +26,15 @@ export default class Tests {
     @Column()
     pdf: string;
 
-    @ManyToOne(() => Categories, category => category.tests)
+    @ManyToOne(() => Categories, category => category.tests, { onDelete: 'CASCADE' })
     category: Categories;
 
-    @ManyToOne(() => Teachers, teacher => teacher.tests)
+    @ManyToOne(() => Teachers, teacher => teacher.tests, { onDelete: 'CASCADE' })
     teacher: Teachers;
 
-    @ManyToOne(() => Courses, course => course.tests)
+    @ManyToOne(() => Courses, course => course.tests, { onDelete: 'CASCADE' })
     course: Courses;
 
-    @ManyToOne(() => Subjects, subject => subject.tests)
+    @ManyToOne(() => Subjects, subject => subject.tests, { onDelete: 'CASCADE' })
     subject: Subjects;
 }
