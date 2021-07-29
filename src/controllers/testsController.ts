@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Tests from "../entities/Tests";
+import schema from "../schemas/Test";
 
 export async function createTest(req: Request, res: Response) {
     try {
+        const { error } = schema.validate(req.body);
+        if (error) return res.status(400).send("invalid body");
         const test = await getRepository(Tests).save(req.body);
         res.status(201).send(test);
     } catch (error) {

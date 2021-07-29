@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Subjects from "../entities/Subjects";
+import schema from "../schemas/Subjects";
 
 export async function createSubject(req: Request, res: Response) {
     try {
+        const { error } = schema.validate(req.body);
+        if (error) return res.status(400).send("invalid body");
         const subject = await getRepository(Subjects).save(req.body);
         res.status(201).send(subject);
     } catch (e) {

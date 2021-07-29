@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Teachers from "../entities/Teachers";
+import schema from "../schemas/Teachers";
 
 export async function getAll(req: Request, res: Response) {
     try {
@@ -29,6 +30,8 @@ export async function getTeacherById(req: Request, res: Response) {
 
 export async function createTeacher(req: Request, res: Response) {
     try {
+        const { error } = schema.validate(req.body);
+        if (error) return res.status(400).send("invalid body");
         const teacher = await getRepository(Teachers).save(req.body);
         res.status(201).send(teacher);
     } catch (e) {
