@@ -2,6 +2,9 @@ import express from "express";
 const router = express.Router();
 import * as teachersController from "../controllers/teachersController";
 
-router.use("/", teachersController.getAll);
+router.get("/:id", teachersController.getTeacherById);
+router.get("/", teachersController.getAll);
+
+router.post("/", teachersController.createTeacher);
 
 export default router;
