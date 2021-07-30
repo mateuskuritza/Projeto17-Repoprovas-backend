@@ -24,3 +24,29 @@ export async function getAll(req: Request, res: Response) {
         res.sendStatus(500);
     }
 }
+
+export async function getTeachers(req: Request, res: Response) {
+    try {
+        const allTeachers = await getRepository(Courses).find({
+            where: { id: req.params.id },
+            relations: ["tests.teacher"]
+        });
+        res.status(200).send(allTeachers);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+}
+
+export async function getSubjects(req: Request, res: Response) {
+    try {
+        const allSubjects = await getRepository(Courses).find({
+            where: { id: req.params.id },
+            relations: ["subjects"]
+        });
+        res.status(200).send(allSubjects);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+}

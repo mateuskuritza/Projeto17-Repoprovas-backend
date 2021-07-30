@@ -3,7 +3,7 @@ import { getRepository } from "typeorm";
 import Tests from "../entities/Tests";
 import schema from "../schemas/Test";
 
-const relations = ["category", "teacher", "course", "subject"];
+const relations = ["category", "teacher", "course", "subject", "subject.period"];
 
 export async function createTest(req: Request, res: Response) {
     try {

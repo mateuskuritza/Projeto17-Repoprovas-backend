@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import Courses from "./Courses";
 import Periods from "./Periods";
 import Teachers from "./Teachers";
 import Tests from "./Tests";
@@ -13,13 +14,16 @@ export default class Subjects {
     @Column()
     periodId: number;
 
-    @OneToMany(() => Tests, test => test.subject)
+    @Column()
+    courseId: number;
+
+    @OneToMany(() => Tests, test => test.subject, { onDelete: "CASCADE" })
     tests: Tests[];
 
-    @ManyToOne(() => Periods, period => period.subjects)
+    @ManyToOne(() => Periods, period => period.subjects, { onDelete: "CASCADE" })
     period: Periods;
 
-    @ManyToMany(() => Teachers)
+    @ManyToMany(() => Teachers, { onDelete: "CASCADE" })
     @JoinTable()
     teachers: Teachers[];
 }

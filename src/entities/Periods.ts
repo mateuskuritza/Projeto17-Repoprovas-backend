@@ -8,6 +8,6 @@ export default class Periods {
     @Column()
     name: string;
 
-    @OneToMany(() => Subjects, subjects => subjects.period)
+    @OneToMany(() => Subjects, subjects => subjects.period, { onDelete: "CASCADE" })
     subjects: Subjects[];
 }

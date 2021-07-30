@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from "typeorm";
 import Tests from "./Tests";
-import Subjects from "./Subjects";
 
 @Entity("teachers")
 export default class Teachers {
@@ -10,8 +9,9 @@ export default class Teachers {
     @Column()
     name: string;
 
-    @OneToMany(() => Tests, test => test.teacher)
+    @Column()
+    courseId: number;
+
+    @OneToMany(() => Tests, test => test.teacher, { onDelete: "CASCADE" })
     tests: Tests[];
-
-
 }

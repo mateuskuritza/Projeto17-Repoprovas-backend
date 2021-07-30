@@ -2,7 +2,6 @@ import Categories from "../../src/entities/Categories";
 import Periods from "../../src/entities/Periods";
 import Courses from "../../src/entities/Courses";
 import Subjects from "../../src/entities/Subjects";
-import Subjects_teachers from "../../src/entities/Teachers_subjects_subjects";
 import Teachers from "../../src/entities/Teachers";
 import Tests from "../../src/entities/Tests";
 
@@ -28,11 +27,10 @@ export async function populatePeriods() {
 }
 
 export async function clearDatabase() {
-    //await getRepository(Subjects_teachers).clear();
-    await getRepository(Periods).clear();
-    await getRepository(Categories).clear();
-    await getRepository(Courses).clear();
-    await getRepository(Subjects).clear();
-    await getRepository(Teachers).clear();
-    await getRepository(Tests).clear();
+    await getRepository(Categories).delete({});
+    await getRepository(Tests).delete({});
+    await getRepository(Teachers).delete({});
+    await getRepository(Subjects).delete({});
+    await getRepository(Periods).delete({});
+    await getRepository(Courses).delete({});
 }

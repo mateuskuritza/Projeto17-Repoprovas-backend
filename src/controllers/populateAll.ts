@@ -2,7 +2,6 @@ import Categories from "../../src/entities/Categories";
 import Periods from "../../src/entities/Periods";
 import Courses from "../../src/entities/Courses";
 import Subjects from "../../src/entities/Subjects";
-import Subjects_teachers from "../../src/entities/Teachers_subjects_subjects";
 import Teachers from "../../src/entities/Teachers";
 import Tests from "../../src/entities/Tests";
 
@@ -31,11 +30,24 @@ export async function populatePeriods() {
 }
 
 export async function populateAll(req: Request, res: Response) {
-    await populateCategories();
-    await populatePeriods();
-    await factories.course.createCourse({ name: "Curso legal" });
-    await factories.subject.createSubject({ name: "Mecanica", periodId: 1 });
-    await factories.teacher.createTeacher({ name: "Nome do professor" });
-    await factories.test.createTest({ name: "Teste de Mecanica", categoryId: 1, teacherId: 1, subjectId: 1, courseId: 1, pdf: "link do pdf" });
-    res.sendStatus(201);
+    try {
+        await getRepository(Categories).delete({});
+        await getRepository(Tests).delete({});
+        await getRepository(Teachers).delete({});
+        await getRepository(Subjects).delete({});
+        await getRepository(Periods).delete({});
+        await getRepository(Courses).delete({});
+        /*await populateCategories();
+        await populatePeriods();
+        await factories.course.createCourse({ name: "Curso legal" });
+        //await factories.subject.createSubject({ name: "Mecanica", periodId: 1 });
+        await factories.subject.createSubject({ name: "Elétrica", periodId: 11 });
+        await factories.teacher.createTeacher({ name: "Nome do professor" });
+        await factories.test.createTest({ name: "Teste de Elétrica", categoryId: 7, teacherId: 3, subjectId: 5, courseId: 1, pdf: "link do pdf" });
+        await factories.test.createTest({ name: "Teste de Elétrica", categoryId: 5, teacherId: 3, subjectId: 5, courseId: 2, pdf: "link do pdf 2" });
+        */res.sendStatus(201);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
 }

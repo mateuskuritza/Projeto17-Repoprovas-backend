@@ -9,6 +9,6 @@ export default class Categories {
     @Column()
     name: string;
 
-    @OneToMany(() => Tests, tests => tests.category)
+    @OneToMany(() => Tests, tests => tests.category, { onDelete: "CASCADE" })
     tests: Tests[];
 }
