@@ -31,15 +31,15 @@ export async function populatePeriods() {
 
 export async function populateAll(req: Request, res: Response) {
     try {
-        await getRepository(Categories).delete({});
-        await getRepository(Tests).delete({});
-        await getRepository(Teachers).delete({});
-        await getRepository(Subjects).delete({});
-        await getRepository(Periods).delete({});
-        await getRepository(Courses).delete({});
-        /*await populateCategories();
+        await getRepository(Categories).query("TRUNCATE categories RESTART IDENTITY CASCADE");
+        await getRepository(Tests).query("TRUNCATE tests RESTART IDENTITY CASCADE");
+        await getRepository(Teachers).query("TRUNCATE teachers RESTART IDENTITY CASCADE");
+        await getRepository(Subjects).query("TRUNCATE subjects RESTART IDENTITY CASCADE");
+        await getRepository(Periods).query("TRUNCATE periods RESTART IDENTITY CASCADE");
+        await getRepository(Courses).query("TRUNCATE courses RESTART IDENTITY CASCADE");
+        await populateCategories();
         await populatePeriods();
-        await factories.course.createCourse({ name: "Curso legal" });
+        /*await factories.course.createCourse({ name: "Curso legal" });
         //await factories.subject.createSubject({ name: "Mecanica", periodId: 1 });
         await factories.subject.createSubject({ name: "Elétrica", periodId: 11 });
         await factories.teacher.createTeacher({ name: "Nome do professor" });

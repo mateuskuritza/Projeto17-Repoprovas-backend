@@ -27,10 +27,12 @@ export async function populatePeriods() {
 }
 
 export async function clearDatabase() {
-    await getRepository(Categories).delete({});
-    await getRepository(Tests).delete({});
-    await getRepository(Teachers).delete({});
-    await getRepository(Subjects).delete({});
-    await getRepository(Periods).delete({});
-    await getRepository(Courses).delete({});
+    await getRepository(Categories).query("TRUNCATE categories RESTART IDENTITY CASCADE");
+    await getRepository(Tests).query("TRUNCATE tests RESTART IDENTITY CASCADE");
+    await getRepository(Teachers).query("TRUNCATE teachers RESTART IDENTITY CASCADE");
+    await getRepository(Subjects).query("TRUNCATE subjects RESTART IDENTITY CASCADE");
+    await getRepository(Periods).query("TRUNCATE periods RESTART IDENTITY CASCADE");
+    await getRepository(Courses).query("TRUNCATE courses RESTART IDENTITY CASCADE");
+    await populateCategories();
+    await populatePeriods();
 }
