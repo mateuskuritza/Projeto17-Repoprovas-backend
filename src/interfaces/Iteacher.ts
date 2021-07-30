@@ -1,3 +1,4 @@
 export default interface Teacher {
-    name: string
+    name: string,
+    courseId: number
 }

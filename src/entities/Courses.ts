@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import Subjects from "./Subjects";
-import Tests from "./Tests";
+import Teachers from "./Teachers";
 @Entity("courses")
 export default class Courses {
     @PrimaryGeneratedColumn()
@@ -9,6 +9,9 @@ export default class Courses {
     @Column()
     name: string;
 
-    @OneToMany(() => Tests, test => test.course, { onDelete: "CASCADE" })
-    tests: Tests[];
+    @OneToMany(() => Teachers, teacher => teacher.course, { onDelete: "CASCADE" })
+    teachers: Teachers[];
+
+    @OneToMany(() => Subjects, subject => subject.course, { onDelete: "CASCADE" })
+    subjects: Subjects[];
 }

@@ -32,9 +32,6 @@ export default class Tests {
     @ManyToOne(() => Teachers, teacher => teacher.tests, { onDelete: 'CASCADE' })
     teacher: Teachers;
 
-    @ManyToOne(() => Courses, course => course.tests, { onDelete: 'CASCADE' })
-    course: Courses;
-
     @ManyToOne(() => Subjects, subject => subject.tests, { onDelete: 'CASCADE' })
     subject: Subjects;
 }

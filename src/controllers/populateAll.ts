@@ -39,13 +39,47 @@ export async function populateAll(req: Request, res: Response) {
         await getRepository(Courses).query("TRUNCATE courses RESTART IDENTITY CASCADE");
         await populateCategories();
         await populatePeriods();
-        /*await factories.course.createCourse({ name: "Curso legal" });
-        //await factories.subject.createSubject({ name: "Mecanica", periodId: 1 });
-        await factories.subject.createSubject({ name: "Elétrica", periodId: 11 });
-        await factories.teacher.createTeacher({ name: "Nome do professor" });
-        await factories.test.createTest({ name: "Teste de Elétrica", categoryId: 7, teacherId: 3, subjectId: 5, courseId: 1, pdf: "link do pdf" });
-        await factories.test.createTest({ name: "Teste de Elétrica", categoryId: 5, teacherId: 3, subjectId: 5, courseId: 2, pdf: "link do pdf 2" });
-        */res.sendStatus(201);
+
+        await factories.course.createCourse({ name: "Curso legal" });
+        await factories.course.createCourse({ name: "Curso chato" });
+        await factories.course.createCourse({ name: "Curso mais ou menos" });
+
+        await factories.subject.createSubject({ name: "Matéria legal 1", periodId: 1, courseId: 1 });
+        await factories.subject.createSubject({ name: "Matéria legal 2", periodId: 2, courseId: 1 });
+        await factories.subject.createSubject({ name: "Matéria legal 3", periodId: 11, courseId: 1 });
+
+        await factories.subject.createSubject({ name: "Matéria chata 1", periodId: 3, courseId: 2 });
+        await factories.subject.createSubject({ name: "Matéria chata 2", periodId: 6, courseId: 2 });
+        await factories.subject.createSubject({ name: "Matéria chata 3", periodId: 9, courseId: 2 });
+
+        await factories.subject.createSubject({ name: "Matéria mais ou menos 1", periodId: 2, courseId: 3 });
+        await factories.subject.createSubject({ name: "Matéria mais ou menos 2", periodId: 4, courseId: 3 });
+        await factories.subject.createSubject({ name: "Matéria mais ou menos 3", periodId: 10, courseId: 3 });
+
+        await factories.teacher.createTeacher({ name: "Professor legal 1", courseId: 1 });
+        await factories.teacher.createTeacher({ name: "Professor legal 2", courseId: 1 });
+        await factories.teacher.createTeacher({ name: "Professor legal 3", courseId: 1 });
+
+        await factories.teacher.createTeacher({ name: "Professor chato 1", courseId: 2 });
+        await factories.teacher.createTeacher({ name: "Professor chato 2", courseId: 2 });
+        await factories.teacher.createTeacher({ name: "Professor chato 3", courseId: 2 });
+
+        await factories.teacher.createTeacher({ name: "Professor mais ou menos 1", courseId: 3 });
+        await factories.teacher.createTeacher({ name: "Professor mais ou menos 2", courseId: 3 });
+        await factories.teacher.createTeacher({ name: "Professor mais ou menos 3", courseId: 3 });
+
+        await factories.test.createTest({ name: "Teste legal 1", categoryId: 1, teacherId: 1, subjectId: 1, courseId: 1, pdf: "link do pdf legal 1" });
+        await factories.test.createTest({ name: "Teste legal 2", categoryId: 2, teacherId: 2, subjectId: 2, courseId: 1, pdf: "link do pdf legal 2" });
+        await factories.test.createTest({ name: "Teste legal 3", categoryId: 3, teacherId: 3, subjectId: 3, courseId: 1, pdf: "link do pdf legal 3" });
+
+        await factories.test.createTest({ name: "Teste chato 1", categoryId: 2, teacherId: 4, subjectId: 4, courseId: 2, pdf: "link do pdf chato 1" });
+        await factories.test.createTest({ name: "Teste chato 2", categoryId: 3, teacherId: 5, subjectId: 5, courseId: 2, pdf: "link do pdf chato 2" });
+        await factories.test.createTest({ name: "Teste chato 3", categoryId: 4, teacherId: 6, subjectId: 6, courseId: 2, pdf: "link do pdf chato 3" });
+
+        await factories.test.createTest({ name: "Teste mais ou menos 1", categoryId: 3, teacherId: 7, subjectId: 7, courseId: 3, pdf: "link do pdf mais ou menos 1" });
+        await factories.test.createTest({ name: "Teste mais ou menos 2", categoryId: 4, teacherId: 8, subjectId: 8, courseId: 3, pdf: "link do pdf mais ou menos 2" });
+        await factories.test.createTest({ name: "Teste mais ou menos 3", categoryId: 5, teacherId: 9, subjectId: 9, courseId: 3, pdf: "link do pdf mais ou menos 3" });
+        res.sendStatus(201);
     } catch (err) {
         console.log(err);
         res.sendStatus(500);

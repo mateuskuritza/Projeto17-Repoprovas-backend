@@ -9,9 +9,9 @@ const test = supertest(app);
 
 beforeAll(async () => {
     await init();
-    //await clearDatabase();
-    //await populateCategories();
-    //await populatePeriods();
+    await clearDatabase();
+    await populateCategories();
+    await populatePeriods();
 });
 
 afterAll(async () => {
@@ -29,7 +29,7 @@ describe("GET /categories", () => {
         expect(result.body[0]).toMatchObject({
             id: expect.any(Number),
             name: expect.any(String),
-            tests: []
+            tests: expect.any(Array)
         })
     })
 })

@@ -3,8 +3,6 @@ import { getRepository } from "typeorm";
 import Tests from "../entities/Tests";
 import schema from "../schemas/Test";
 
-const relations = ["category", "teacher", "course", "subject", "subject.period"];
-
 export async function createTest(req: Request, res: Response) {
     try {
         const { error } = schema.validate(req.body);
@@ -19,7 +17,7 @@ export async function createTest(req: Request, res: Response) {
 
 export async function getAll(req: Request, res: Response) {
     try {
-        const allTests = await getRepository(Tests).find({ relations });
+        const allTests = await getRepository(Tests).find();
         res.status(200).send(allTests);
     } catch (e) {
         console.log(e);
@@ -32,8 +30,7 @@ export async function getTestById(req: Request, res: Response) {
         const test = await getRepository(Tests).findOne({
             where: {
                 id: req.params.id
-            },
-            relations
+            }
         });
         if (!test) return res.sendStatus(404);
         res.status(200).send(test);
@@ -48,9 +45,9 @@ export async function getBySubjectId(req: Request, res: Response) {
         const tests = await getRepository(Tests).find({
             where: {
                 subjectId: req.params.id
-            },
-            relations
+            }
         });
+        if (tests.length === 0) return res.sendStatus(404);
         res.status(200).send(tests);
     } catch (e) {
         console.log(e);
@@ -63,9 +60,9 @@ export async function getByTeacherId(req: Request, res: Response) {
         const tests = await getRepository(Tests).find({
             where: {
                 teacherId: req.params.id
-            },
-            relations
+            }
         });
+        if (tests.length === 0) return res.sendStatus(404);
         res.status(200).send(tests);
     } catch (e) {
         console.log(e);

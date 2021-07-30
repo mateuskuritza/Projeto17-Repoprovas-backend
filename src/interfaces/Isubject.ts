@@ -1,4 +1,5 @@
 export default interface Subject {
     name: string,
-    periodId: number
+    periodId: number,
+    courseId: number
 }

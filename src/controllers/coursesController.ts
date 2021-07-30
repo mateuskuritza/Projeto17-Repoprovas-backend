@@ -29,7 +29,7 @@ export async function getTeachers(req: Request, res: Response) {
     try {
         const allTeachers = await getRepository(Courses).find({
             where: { id: req.params.id },
-            relations: ["tests.teacher"]
+            relations: ["teachers", "teachers.tests"]
         });
         res.status(200).send(allTeachers);
     } catch (e) {
@@ -42,7 +42,7 @@ export async function getSubjects(req: Request, res: Response) {
     try {
         const allSubjects = await getRepository(Courses).find({
             where: { id: req.params.id },
-            relations: ["subjects"]
+            relations: ["subjects", "subjects.period"]
         });
         res.status(200).send(allSubjects);
     } catch (e) {
