@@ -27,7 +27,7 @@ export async function getAll(req: Request, res: Response) {
 
 export async function getTeachers(req: Request, res: Response) {
     try {
-        const allTeachers = await getRepository(Courses).find({
+        const allTeachers = await getRepository(Courses).findOne({
             where: { id: req.params.id },
             relations: ["teachers", "teachers.tests"]
         });
@@ -40,7 +40,7 @@ export async function getTeachers(req: Request, res: Response) {
 
 export async function getSubjects(req: Request, res: Response) {
     try {
-        const allSubjects = await getRepository(Courses).find({
+        const allSubjects = await getRepository(Courses).findOne({
             where: { id: req.params.id },
             relations: ["subjects", "subjects.period"]
         });

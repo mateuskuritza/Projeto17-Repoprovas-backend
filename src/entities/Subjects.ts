@@ -23,10 +23,6 @@ export default class Subjects {
     @ManyToOne(() => Periods, period => period.subjects, { onDelete: "CASCADE" })
     period: Periods;
 
-    @ManyToMany(() => Teachers, { onDelete: "CASCADE" })
-    @JoinTable()
-    teachers: Teachers[];
-
     @ManyToOne(() => Courses, course => course.teachers, { onDelete: "CASCADE" })
     course: Courses;
 }
