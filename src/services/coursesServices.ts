@@ -18,3 +18,7 @@ export async function courseSubjects(subjectId: number) {
         relations: ["subjects", "subjects.period"]
     });
 }
+
+export async function createCourse(course: Courses) {
+    return await getRepository(Courses).save(course);
+}

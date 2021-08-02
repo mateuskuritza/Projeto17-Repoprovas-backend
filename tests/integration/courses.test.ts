@@ -42,7 +42,7 @@ describe("GET /courses", () => {
     })
 })
 
-describe("GET /:id/teachers", () => {
+describe("GET /courses/:id/teachers", () => {
     it("should return status 200", async () => {
         const result = await test.get("/courses/1/teachers");
         expect(result.status).toEqual(200);
@@ -63,7 +63,7 @@ describe("GET /:id/teachers", () => {
     })
 })
 
-describe("GET /:id/subjects", () => {
+describe("GET /courses/:id/subjects", () => {
     it("should return status 200", async () => {
         const result = await test.get("/courses/1/subjects");
         expect(result.status).toEqual(200);
@@ -81,5 +81,16 @@ describe("GET /:id/subjects", () => {
             name: newCourse.name,
             subjects: []
         });
+    })
+})
+
+describe("POST /courses", () => {
+    it("should return status 201", async () => {
+        const result = await test.post("/courses").send({ name: "fakeName" });
+        expect(result.status).toEqual(201);
+    })
+    it("should return status 400 invalid body", async () => {
+        const result = await test.post("/courses").send({ name: "1" });
+        expect(result.status).toEqual(400);
     })
 })
