@@ -1,4 +1,4 @@
-import "./src/setup";
+require("./src/setup");
 
 export = {
     type: "postgres",
