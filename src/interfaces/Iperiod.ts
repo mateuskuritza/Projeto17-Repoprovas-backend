@@ -1,3 +1,3 @@
-export default interface Period {
+export default interface IPeriod {
     name: string
 }

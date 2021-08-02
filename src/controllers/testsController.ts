@@ -1,22 +1,19 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
-import Tests from "../entities/Tests";
 import schema from "../schemas/Test";
-
-const relations = ["category", "subject", "teacher"];
+import * as testsServices from "../services/testsServices";
 
 export async function createTest(req: Request, res: Response) {
     try {
         const { error } = schema.validate(req.body);
         if (error) return res.status(400).send(error.details[0].message);
-        const test = await getRepository(Tests).save(req.body);
-        res.status(201).send(test);
+        const newTest = await testsServices.newTest(req.body);
+        res.status(201).send(newTest);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
 }
-
+/*
 export async function getAll(req: Request, res: Response) {
     try {
         const allTests = await getRepository(Tests).find({ relations });
@@ -42,15 +39,13 @@ export async function getTestById(req: Request, res: Response) {
         res.sendStatus(500);
     }
 }
-
+*/
 export async function getBySubjectId(req: Request, res: Response) {
     try {
-        const tests = await getRepository(Tests).find({
-            where: {
-                subjectId: req.params.id
-            },
-            relations
-        });
+        const subjectId = Number(req.params.id);
+        if (!subjectId) return res.status(400).send("id missing");
+        const tests = await testsServices.testsBySubjectId(subjectId);
+        if (tests.length === 0) return res.sendStatus(404);
         res.status(200).send(tests);
     } catch (e) {
         console.log(e);
@@ -60,12 +55,9 @@ export async function getBySubjectId(req: Request, res: Response) {
 
 export async function getByTeacherId(req: Request, res: Response) {
     try {
-        const tests = await getRepository(Tests).find({
-            where: {
-                teacherId: req.params.id
-            },
-            relations
-        });
+        const teacherId = Number(req.params.id);
+        if (!teacherId) return res.status(400).send("id missing");
+        const tests = await testsServices.testsByTeacherId(teacherId);
         if (tests.length === 0) return res.sendStatus(404);
         res.status(200).send(tests);
     } catch (e) {

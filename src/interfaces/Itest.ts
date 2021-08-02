@@ -1,4 +1,4 @@
-export default interface Test {
+export default interface ITest {
     name: string,
     categoryId: number,
     teacherId: number,

@@ -6,8 +6,8 @@ router.post("/", testsController.createTest);
 
 router.get("/teacher/:id", testsController.getByTeacherId);
 router.get("/subject/:id", testsController.getBySubjectId);
-router.get("/:id", testsController.getTestById);
-router.get("/", testsController.getAll);
+//router.get("/:id", testsController.getTestById);
+//router.get("/", testsController.getAll);
 
 
 export default router;

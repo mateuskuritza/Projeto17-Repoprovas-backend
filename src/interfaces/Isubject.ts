@@ -1,4 +1,4 @@
-export default interface Subject {
+export default interface ISubject {
     name: string,
     periodId: number,
     courseId: number

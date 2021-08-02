@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
-import Courses from "../entities/Courses";
 import schema from "../schemas/Courses";
-
+import * as coursesServices from "../services/coursesServices";
+/*
 export async function createCourse(req: Request, res: Response) {
     try {
         const { error } = schema.validate(req.body);
@@ -13,11 +12,11 @@ export async function createCourse(req: Request, res: Response) {
         console.log(e);
         res.sendStatus(500);
     }
-}
+}*/
 
 export async function getAll(req: Request, res: Response) {
     try {
-        const allCourses = await getRepository(Courses).find();
+        const allCourses = await coursesServices.allCourses();
         res.status(200).send(allCourses);
     } catch (e) {
         console.log(e);
@@ -27,10 +26,9 @@ export async function getAll(req: Request, res: Response) {
 
 export async function getTeachers(req: Request, res: Response) {
     try {
-        const allTeachers = await getRepository(Courses).findOne({
-            where: { id: req.params.id },
-            relations: ["teachers", "teachers.tests"]
-        });
+        const courseId = Number(req.params.id);
+        if (!courseId) return res.status(400).send("id missing");
+        const allTeachers = await coursesServices.courseTeachers(courseId);
         res.status(200).send(allTeachers);
     } catch (e) {
         console.log(e);
@@ -40,10 +38,9 @@ export async function getTeachers(req: Request, res: Response) {
 
 export async function getSubjects(req: Request, res: Response) {
     try {
-        const allSubjects = await getRepository(Courses).findOne({
-            where: { id: req.params.id },
-            relations: ["subjects", "subjects.period"]
-        });
+        const subjectId = Number(req.params.id);
+        if (!subjectId) return res.status(400).send("id missing");
+        const allSubjects = await coursesServices.courseSubjects(subjectId);
         res.status(200).send(allSubjects);
     } catch (e) {
         console.log(e);

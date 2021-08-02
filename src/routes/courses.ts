@@ -7,6 +7,6 @@ router.get("/:id/teachers", coursesController.getTeachers);
 router.get("/:id/subjects", coursesController.getSubjects);
 
 
-router.post("/", coursesController.createCourse);
+//router.post("/", coursesController.createCourse);
 
 export default router;

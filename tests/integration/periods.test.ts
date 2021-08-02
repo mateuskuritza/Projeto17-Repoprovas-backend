@@ -20,16 +20,17 @@ afterAll(async () => {
 });
 
 
-describe("GET /categories", () => {
+describe("GET /periods", () => {
     it("should return status 200", async () => {
-        const result = await test.get("/categories");
+        const result = await test.get("/periods");
         expect(result.status).toEqual(200);
     })
-    it("should return array of categories with subjects", async () => {
-        const result = await test.get("/categories");
+    it("should return array of periods with subjects", async () => {
+        const result = await test.get("/periods");
         expect(result.body[0]).toMatchObject({
             id: expect.any(Number),
-            name: expect.any(String)
+            name: expect.any(String),
+            subjects: []
         })
     })
 })

@@ -1,3 +1,3 @@
-export default interface Course {
+export default interface ICourse {
     name: string
 }
