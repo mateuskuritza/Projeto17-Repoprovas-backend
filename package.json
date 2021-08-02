@@ -2,16 +2,13 @@
   "name": "typescript-back-template",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "14.16.1"
-  },
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test npm run typeorm migration:run && npx jest --rootDir=tests -i",
-    "build": "npx tsc --outDir dist && npx typeorm migration:run",
+    "build": "NODE_ENV=production npx tsc --outDir dist && npx typeorm migration:run",
     "start": "NODE_ENV=production NODE_TLS_REJECT_UNAUTHORIZED=0 node dist/src/server.js",
     "postinstall": "npm run build",
-    "dev": "npm run typeorm migration:run && npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\"",
+    "dev": "NODE_ENV=development npm run typeorm migration:run && npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\"",
     "typeorm": "ts-node ./node_modules/typeorm/cli"
   },
   "keywords": [],
