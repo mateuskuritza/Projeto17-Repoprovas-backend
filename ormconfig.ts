@@ -8,5 +8,11 @@ module.exports = {
         migrationsDir: "src/migrations/",
         entitiesDir: "src/entities/*"
     },
-    migrationsTransactionMode: 'each'
+    migrationsTransactionMode: 'each',
+    "ssl": true,
+    "extra": {
+        "ssl": {
+            "rejectUnauthorized": false
+        }
+    }
 };
