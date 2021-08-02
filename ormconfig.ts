@@ -6,7 +6,7 @@ module.exports = {
     migrations: ["dist/src/migrations/*.js"],
     cli: {
         migrationsDir: "src/migrations/",
-        entitiesDir: "src/entities/*"
+        entitiesDir: "src/entities"
     },
     migrationsTransactionMode: 'each',
     "ssl": true,
