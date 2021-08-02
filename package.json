@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test npm run typeorm migration:run && npx jest --rootDir=tests -i",
-    "build": "npx tsc --outDir dist && npx typeorm migration:run",
+    "build": "npx tsc --outDir dist",
     "start": "node dist/server.js",
     "postinstall": "npm run build",
     "dev": "npm run typeorm migration:run && npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\"",
