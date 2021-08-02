@@ -1,6 +1,6 @@
 require("./src/setup");
 
-export = {
+module.exports = {
     type: "postgres",
     url: process.env.DATABASE_URL,
     migrationsTableName: "migrations",
