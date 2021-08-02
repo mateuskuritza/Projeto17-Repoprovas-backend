@@ -38,10 +38,11 @@ export async function clearDatabase() {
     await getRepository(Courses).query("TRUNCATE courses RESTART IDENTITY CASCADE");
 }
 
-export async function resetDatabase() {
+export async function resetDatabase(req: Request, res: Response) {
     await clearDatabase();
     await populateCategories();
     await populatePeriods();
+    res.status(200).send("Database clear");
 }
 
 export async function populateAll(req: Request, res: Response) {
