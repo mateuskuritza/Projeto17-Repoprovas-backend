@@ -6,7 +6,7 @@ import categoriesRouter from "./categories";
 import periodsRouter from "./periods";
 import teachersRouter from "./teachers";
 import subjectsRouter from "./subjects";
-import { populateAll } from "../controllers/populateAll";
+import { populateAll, resetDatabase } from "../controllers/populateAll";
 
 router.use("/tests", testsRouter);
 router.use("/courses", coursesRouter);
@@ -15,5 +15,7 @@ router.use("/periods", periodsRouter);
 router.use("/teachers", teachersRouter);
 router.use("/subjects", subjectsRouter);
 router.get("/populate", populateAll);
+router.get("/populate/clear", resetDatabase);
+
 
 export default router;
